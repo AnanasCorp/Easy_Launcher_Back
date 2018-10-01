@@ -12,5 +12,7 @@ app.listen(5000, () => {
 // ROUTES 
 
 app.get('/', (req, res) => {
-    console.log("ça marche chef");
+    res.json({
+        message: 'Bonsoir 🎃'
+    });
 });
