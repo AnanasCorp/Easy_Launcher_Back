@@ -14,4 +14,8 @@ routes.get('/', (req, res) => {
     });
 });
 
+routes.get('routeTest', (req, res) => {
+    console.log('reeoizheifueiprh');
+});
+
 module.exports = routes;
