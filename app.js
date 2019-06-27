@@ -1,18 +1,19 @@
-const express = require("express");
-const firebase = require("firebase");
-const app = express();
+require('dotenv').config()
+const express = require("express")
+const firebase = require("firebase")
+const app = express()
 
 const config = {
-    apiKey: "AIzaSyDKkxuMhuZtzQa0Y7OAFYHmaVROYfSGB1s",
-    authDomain: "easy-launcher-6669.firebaseapp.com",
-    databaseURL: "https://easy-launcher-6669.firebaseio.com",
-    storageBucket: "easy-launcher-6669.appspot.com",
-};
-firebase.initializeApp(config);
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DB_URL,
+    storageBucket: process.env.STORAGE_BUCKET,
+}
+firebase.initializeApp(config)
 
-const routes = require("./controllers/routes");
-app.use('/', routes);
+const routes = require("./controllers/routes")
+app.use('/', routes)
 
 app.listen(5000, () => {
-    console.log("Listening on http://localhost:5000"); 
+    console.log("Listening on http://localhost:5000")
 });
