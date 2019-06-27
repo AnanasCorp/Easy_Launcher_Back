@@ -1,5 +1,3 @@
-// SETUP
-
 const express = require("express");
 const firebase = require("firebase");
 const app = express();
