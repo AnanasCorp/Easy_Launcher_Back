@@ -28,13 +28,14 @@ module.exports = {
     },
 
     createUser: (email, password) => {
-        auth.createUserWithEmailAndPassword(email, password).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            alert(`${errorMessage}: ${errorCode}`);
-            // ...
+        return new Promise((resolve, reject) => {
+            auth.createUserWithEmailAndPassword(email, password)
+            .then(data => {
+                resolve(data)
+            })
+            .catch(error => {
+                reject(error)
+            })
         });
     }
-
 }
