@@ -1,18 +1,17 @@
 const db = require("firebase").database();
+const auth = require("firebase").auth();
 
 module.exports = {
 
-    add: (user) => {
+    add: (data) => {
         return new Promise((resolve, reject) => {
-            db.ref('users').push({
-                username: user.name,
-                email: user.email,
-                profile_picture : user.imageUrl
+            db.ref('data').push({
+                data
             }, (error) => {
                 if (error) reject(error)
                 else resolve({ 
                     success: true,
-                    message: 'Added user successfully'
+                    message: 'Added data successfully'
                 })
             })
         })
@@ -26,6 +25,17 @@ module.exports = {
                 reject(error)
             })
         })
-    }
+    },
 
+    createUser: (email, password) => {
+        return new Promise((resolve, reject) => {
+            auth.createUserWithEmailAndPassword(email, password)
+            .then(data => {
+                resolve(data)
+            })
+            .catch(error => {
+                reject(error)
+            })
+        });
+    }
 }

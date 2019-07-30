@@ -13,7 +13,7 @@ routes.get('/test', (req, res) => {
     })
 })
 
-routes.get('/addUser', (req, res) => {
+routes.get('/add', (req, res) => {
     user.add({
         name: "John Doe",
         email: "johndoe@gmailcom",
@@ -27,6 +27,14 @@ routes.get('/addUser', (req, res) => {
 
 routes.get('/getAllUsers', (req, res) => {
     user.getAllUsers().then(error => {
+        res.status(500).send(error)
+    }, data => {
+        res.status(200).json(data)
+    })
+})
+
+routes.get('/createUser', (req, res) => {
+    user.createUser('test@mail.com', 'password').then(error => {
         res.status(500).send(error)
     }, data => {
         res.status(200).json(data)
