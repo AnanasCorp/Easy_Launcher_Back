@@ -13,7 +13,7 @@ routes.get('/test', (req, res) => {
     })
 })
 
-routes.get('/addUser', (req, res) => {
+routes.get('/add', (req, res) => {
     user.add({
         name: "John Doe",
         email: "johndoe@gmailcom",
