@@ -3,20 +3,6 @@ const auth = require("firebase").auth();
 
 module.exports = {
 
-    add: (data) => {
-        return new Promise((resolve, reject) => {
-            db.ref('data').push({
-                data
-            }, (error) => {
-                if (error) reject(error)
-                else resolve({ 
-                    success: true,
-                    message: 'Added data successfully'
-                })
-            })
-        })
-    },
-
     getAllUsers: () => {
         return new Promise((resolve, reject) => {
             db.ref('users').on('value', (snapshot) => {
@@ -44,7 +30,6 @@ module.exports = {
             auth.signInWithEmailAndPassword(email, password)
             .then(data => {
                 resolve(data)
-                console.log(auth.currentUser)
             })
             .catch(error => {
                 reject(error)
