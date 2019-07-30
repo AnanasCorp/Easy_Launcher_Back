@@ -1,7 +1,11 @@
 require('dotenv').config()
 const express = require("express")
 const firebase = require("firebase")
+const bodyParser = require('body-parser');
 const app = express()
+
+
+app.use(bodyParser.json());
 
 const config = {
     apiKey: process.env.API_KEY,

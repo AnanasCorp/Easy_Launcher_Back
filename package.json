@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/AnanasCorp/Easy_Launcher_Back#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "dotenv": "^8.0.0",
     "express": "^4.16.3",
     "firebase": "^5.6.0"
