@@ -1,4 +1,5 @@
 const db = require("firebase").database();
+const auth = require("firebase").auth();
 
 module.exports = {
 
@@ -27,7 +28,7 @@ module.exports = {
     },
 
     createUser: (email, password) => {
-        db.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+        auth.createUserWithEmailAndPassword(email, password).catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;

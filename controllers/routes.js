@@ -33,4 +33,8 @@ routes.get('/getAllUsers', (req, res) => {
     })
 })
 
+routes.get('/createUser', (req, res) => {
+    user.createUser('test@mail.com', 'pass');
+})
+
 module.exports = routes;
