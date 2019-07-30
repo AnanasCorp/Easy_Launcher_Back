@@ -33,11 +33,25 @@ routes.get('/getAllUsers', (req, res) => {
     })
 })
 
-routes.get('/createUser', (req, res) => {
+routes.post('/createUser', (req, res) => {
     user.createUser('test@mail.com', 'password').then(error => {
         res.status(500).send(error)
     }, data => {
         res.status(200).json(data)
+    })
+})
+
+routes.post('/loginUser', (req, res) => {
+    user.loginUser('test@mail.com', 'password').then(error => {
+        res.status(500).send(error)
+    }, data => {
+        res.status(200).json(data)
+    })
+})
+
+routes.post('/logoutUser', (req, res) => {
+    user.logoutUser().then(error => {
+        res.status(500).send(error)
     })
 })
 
