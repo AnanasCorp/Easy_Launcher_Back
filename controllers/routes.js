@@ -31,11 +31,9 @@ routes.post('/createUser', (req, res) => {
 })
 
 routes.post('/loginUser', (req, res) => {
-    user.loginUser(req.body.mail, req.body.pass).then(data => {
-        res.status(200).json(data)
-    }, error => {
-        res.status(500).json(error)
-    })
+    user.loginUser(req.body.mail, req.body.pass)
+    .then((data) => res.status(200).json(data))
+    .catch((error) => res.status(500).json(error))
 })
 
 routes.post('/logoutUser', (req, res) => {
