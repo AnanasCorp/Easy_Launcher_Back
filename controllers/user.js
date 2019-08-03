@@ -13,12 +13,11 @@ module.exports = {
         })
     },
 
-    createUser: (email, password) => {
+    createUser: (email, password, username) => {
         return new Promise((resolve, reject) => {
             auth.createUserWithEmailAndPassword(email, password)
-            .then(data => {
-                resolve(data)
-            })
+            .then(createdUserData => createdUserData.user.updateProfile({ displayName: username }))
+            .then(() => resolve({ success: true }))
             .catch(error => {
                 reject(error)
             })
