@@ -23,7 +23,11 @@ routes.get('/getAllUsers', (req, res) => {
 })
 
 routes.post('/createUser', (req, res) => {
-    user.createUser(req.body.mail, req.body.pass).then(data => {
+    user.createUser(
+        req.body.mail,
+        req.body.pass,
+        req.body.username
+    ).then(data => {
         res.status(200).json(data)
     }, error => {
         res.status(500).send(error)
