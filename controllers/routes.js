@@ -55,4 +55,25 @@ routes.post('/addShortcut', (req, res) => {
     })
 })
 
+routes.post('/updateShortcut', (req, res) => {
+    shortcut.updateShortcut({
+        link: req.body.link,
+        icon: req.body.icon,
+        desc: req.body.desc,
+        tab: req.body.tab
+    }, req.body.uid, req.body.sid).then(data => {
+        res.status(200).json(data)
+    }, error => {
+        res.status(500).send(error)
+    })
+})
+
+routes.post('/removeShortcut', (req, res) => {
+    shortcut.removeShortcut(req.body.uid, req.body.sid).then(data => {
+        res.status(200).json(data)
+    }, error => {
+        res.status(500).send(error)
+    })
+})
+
 module.exports = routes;
