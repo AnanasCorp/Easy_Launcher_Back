@@ -14,6 +14,7 @@ const config = {
     authDomain: process.env.AUTH_DOMAIN,
     databaseURL: process.env.DB_URL,
     storageBucket: process.env.STORAGE_BUCKET,
+    projectId: process.env.PROJECT_ID,
 }
 const PORT = process.env.PORT || 5000;
 firebase.initializeApp(config)
