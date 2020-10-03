@@ -15,11 +15,12 @@ const config = {
     databaseURL: process.env.DB_URL,
     storageBucket: process.env.STORAGE_BUCKET,
 }
+const PORT = process.env.PORT || 5000;
 firebase.initializeApp(config)
 
 const routes = require("./controllers/routes")
 app.use('/', routes)
 
-app.listen(5000, () => {
+app.listen(PORT, () => {
     console.log("Listening on http://localhost:5000")
 });
