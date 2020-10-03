@@ -16,7 +16,7 @@ module.exports = {
 
     updateShortcut: (data, userID, shortcutID) => {
         return new Promise((resolve, reject) => {
-            db.ref(`shortcuts/${userID}/-${shortcutID}`).set(data, (error) => {
+            db.ref(`shortcuts/${userID}/${shortcutID}`).set(data, (error) => {
                 if (error) reject(error)
                 else resolve({ 
                     success: true,
@@ -28,7 +28,7 @@ module.exports = {
 
     removeShortcut: (userID, shortcutID) => {
         return new Promise((resolve, reject) => {
-            db.ref(`shortcuts/${userID}/-${shortcutID}`).remove((error) => {
+            db.ref(`shortcuts/${userID}/${shortcutID}`).remove((error) => {
                 if (error) reject(error)
                 else resolve({ 
                     success: true,
