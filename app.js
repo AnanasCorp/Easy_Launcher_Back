@@ -23,5 +23,5 @@ const routes = require("./controllers/routes")
 app.use('/', routes)
 
 app.listen(PORT, () => {
-    console.log("Listening on http://localhost:5000")
+    console.log(`Listening on http://localhost:${PORT}`)
 });
