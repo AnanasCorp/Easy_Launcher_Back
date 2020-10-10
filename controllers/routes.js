@@ -1,6 +1,10 @@
 const routes = require('express').Router()
-const user = require('./user')
+
 const shortcut = require('./shortcut')
+const tabs = require('./tabs')
+const user = require('./user')
+
+//TODO : refacto en plusieurs fichiers de routes dans un folder spécifique
 
 routes.get('/', (req, res) => {
     res.json({
@@ -13,6 +17,8 @@ routes.get('/test', (req, res) => {
         message: 'test'
     })
 })
+
+// User routes
 
 routes.get('/getAllUsers', (req, res) => {
     user.getAllUsers().then(data => {
@@ -46,6 +52,8 @@ routes.post('/logoutUser', (req, res) => {
     })
 })
 
+// Shortcuts routes
+
 routes.post('/addShortcut', (req, res) => {
     shortcut.addShortcut({
         link: req.body.link,
@@ -74,6 +82,34 @@ routes.post('/updateShortcut', (req, res) => {
 
 routes.post('/removeShortcut', (req, res) => {
     shortcut.removeShortcut(req.body.uid, req.body.sid).then(data => {
+        res.status(200).json(data)
+    }, error => {
+        res.status(500).send(error)
+    })
+})
+
+// Tabs routes
+
+routes.get('/getAllTabs', (req, res) => {
+    tabs.getAllTabs().then(data => {
+        res.status(200).json(data)
+    }, error => {
+        res.status(500).send(error)
+    })
+})
+
+routes.post('/addTab', (req, res) => {
+    tabs.addTab({
+        name: req.body.name
+    }, req.body.uid).then(data => {
+        res.status(200).json(data)
+    }, error => {
+        res.status(500).send(error)
+    })
+})
+
+routes.post('/removeTab', (req, res) => {
+    tabs.removeTab(req.body.tid, req.body.uid).then(data => {
         res.status(200).json(data)
     }, error => {
         res.status(500).send(error)
