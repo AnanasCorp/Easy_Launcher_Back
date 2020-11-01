@@ -1,10 +1,21 @@
 const db = require('firebase').database()
+const utils = require('../utils')
 
 module.exports = {
   getAllTabs: () => {
     return new Promise((resolve, reject) => {
       db.ref('tabs').on('value', (snapshot) => {
         resolve(snapshot.val())
+      }, (error) => {
+        reject(error)
+      })
+    })
+  },
+
+  getTabsByUserId: (userId) => {
+    return new Promise((resolve, reject) => {
+      db.ref(`tabs/${userId}`).on('value', (snapshot) => {
+        resolve(utils.convertSnapshotToArray(snapshot))
       }, (error) => {
         reject(error)
       })

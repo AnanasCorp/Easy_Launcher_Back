@@ -98,6 +98,14 @@ routes.get('/getAllTabs', (req, res) => {
     })
 })
 
+routes.get('/getTabs/:id', (req, res) => {
+    tabs.getTabsByUserId(req.params.id).then(data => {
+        res.status(200).json(data)
+    }, error => {
+        res.status(500).send(error)
+    })
+})
+
 routes.post('/addTab', (req, res) => {
     tabs.addTab({
         name: req.body.name
