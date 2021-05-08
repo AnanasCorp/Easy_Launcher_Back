@@ -54,6 +54,22 @@ routes.post('/logoutUser', (req, res) => {
 
 // Shortcuts routes
 
+routes.get('/getAllShortcuts', (req, res) => {
+    tabs.getAllShortcuts().then(data => {
+        res.status(200).json(data)
+    }, error => {
+        res.status(500).send(error)
+    })
+})
+
+routes.get('/getShortcuts/:id', (req, res) => {
+    shortcut.getShortcutsByUserId(req.params.id).then(data => {
+        res.status(200).json(data)
+    }, error => {
+        res.status(500).send(error)
+    })
+})
+
 routes.post('/addShortcut', (req, res) => {
     shortcut.addShortcut({
         link: req.body.link,
