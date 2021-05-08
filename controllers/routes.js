@@ -74,7 +74,7 @@ routes.post('/addShortcut', (req, res) => {
     shortcut.addShortcut({
         link: req.body.link,
         icon: req.body.icon,
-        desc: req.body.desc,
+        name: req.body.name,
         tab: req.body.tab
     }, req.body.uid).then(data => {
         res.status(200).json(data)
@@ -87,7 +87,7 @@ routes.post('/updateShortcut', (req, res) => {
     shortcut.updateShortcut({
         link: req.body.link,
         icon: req.body.icon,
-        desc: req.body.desc,
+        name: req.body.name,
         tab: req.body.tab
     }, req.body.uid, req.body.sid).then(data => {
         res.status(200).json(data)
