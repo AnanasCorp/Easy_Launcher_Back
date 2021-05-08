@@ -2,6 +2,26 @@ const db = require("firebase").database();
 
 module.exports = {
 
+    getAllShortcuts: () => {
+        return new Promise((resolve, reject) => {
+          db.ref('shortcuts').on('value', (snapshot) => {
+            resolve(snapshot.val())
+          }, (error) => {
+            reject(error)
+          })
+        })
+    },
+
+    getShortcutsByUserId: (userID) => {
+        return new Promise((resolve, reject) => {
+            db.ref(`shortcuts/${userID}`).on('value', (snapshot) => {
+                resolve(utils.convertSnapshotToArray(snapshot))
+            }, (error) => {
+                reject(error)
+            })
+        })
+    },
+
     addShortcut: (data, userID) => {
         return new Promise((resolve, reject) => {
             db.ref(`shortcuts/${userID}`).push(data, (error) => {
