@@ -62,8 +62,8 @@ routes.get('/getAllShortcuts', (req, res) => {
     })
 })
 
-routes.get('/getShortcuts/:id', (req, res) => {
-    shortcut.getShortcutsByUserId(req.params.id).then(data => {
+routes.get('/getShortcuts/:id/:tab', (req, res) => {
+    shortcut.getShortcutsByUserIdAndTabId(req.params.id, req.params.tab).then(data => {
         res.status(200).json(data)
     }, error => {
         res.status(500).send(error)
