@@ -12,9 +12,9 @@ module.exports = {
         })
     },
 
-    getShortcutsByUserId: (userID) => {
+    getShortcutsByUserIdAndTabId: (userID, tabId) => {
         return new Promise((resolve, reject) => {
-            db.ref(`shortcuts/${userID}`).on('value', (snapshot) => {
+            db.ref(`shortcuts/${userID}/${tabId}`).on('value', (snapshot) => {
                 resolve(utils.convertSnapshotToArray(snapshot))
             }, (error) => {
                 reject(error)
