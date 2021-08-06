@@ -14,11 +14,21 @@ module.exports = {
 
     getShortcutsByUserIdAndTabId: (userID, tabId) => {
         return new Promise((resolve, reject) => {
-            db.ref(`shortcuts/${userID}/${tabId}`).on('value', (snapshot) => {
-                resolve(utils.convertSnapshotToArray(snapshot))
+           const shortcuts = {};
+           db.ref(`shortcuts/${userID}`)
+            .on('value', (data) => {
+                if (data.val()) {
+                    res = Object.entries(data.val());
+                    res.forEach((shortcut) => {
+                        if (shortcut[1].tab == tabId) {
+                            shortcuts[shortcut[0]] = shortcut[1];
+                        }
+                    });
+                    resolve(shortcuts);
+                }
             }, (error) => {
-                reject(error)
-            })
+                reject(error);
+            });
         })
     },
 
