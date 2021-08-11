@@ -23,6 +23,11 @@ module.exports = {
   },
 
   addTab: (data, userId) => {
+    let count = 0;
+    db.ref(`tabs/${userID}`).on('value', (t) => count = Object.entries(t.val()).length);
+    if (count >=  parseInt(process.env.MAX_TABS, 10)) {
+        return;
+    }
     return new Promise((resolve, reject) => {
       db.ref(`tabs/${userId}`).push(data, (error) => {
         if (error) reject(error)

@@ -14,6 +14,11 @@ module.exports = {
     },
 
     createUser: (email, password, username) => {
+        let count = 0;
+        db.ref('users').on('value', (u) => count = Object.entries(u.val()).length);
+        if (count >=  parseInt(process.env.MAX_USERS, 10)) {
+            return;
+        }
         return new Promise((resolve, reject) => {
             auth.createUserWithEmailAndPassword(email, password)
             .then(createdUserData => createdUserData.user.updateProfile({ displayName: username }))
