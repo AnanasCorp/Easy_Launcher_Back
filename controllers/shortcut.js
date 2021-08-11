@@ -1,4 +1,5 @@
 const db = require("firebase").database();
+require('dotenv').config()
 
 module.exports = {
 
@@ -33,6 +34,11 @@ module.exports = {
     },
 
     addShortcut: (data, userID) => {
+        let count = 0;
+        db.ref(`shortcuts/${userID}`).on('value', (s) => count = Object.entries(s.val()).length);
+        if (count >=  parseInt(process.env.MAX_SHORTCUTS, 10)) {
+            return;
+        }
         return new Promise((resolve, reject) => {
             db.ref(`shortcuts/${userID}`).push(data, (error) => {
                 if (error) reject(error)
