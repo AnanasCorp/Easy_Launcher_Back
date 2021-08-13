@@ -5,6 +5,12 @@ const cors = require("cors")
 const app = express()
 const rateLimit = require("express-rate-limit");
 
+
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}));
+
 app.use(cors())
 
 const config = {
