@@ -1,13 +1,10 @@
 require('dotenv').config()
 const express = require("express")
 const firebase = require("firebase")
-const bodyParser = require('body-parser')
 const cors = require("cors")
 const app = express()
 const rateLimit = require("express-rate-limit");
 
-
-app.use(bodyParser.json());
 app.use(cors())
 
 const config = {
