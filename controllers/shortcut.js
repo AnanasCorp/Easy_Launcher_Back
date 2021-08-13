@@ -1,4 +1,5 @@
 const db = require("firebase").database();
+const auth = require("firebase").auth();
 require('dotenv').config()
 
 module.exports = {
@@ -14,6 +15,9 @@ module.exports = {
     },
 
     getShortcutsByUserIdAndTabId: (userID, tabId) => {
+        if (auth.currentUser.uid != userID) {
+            return;
+        }
         return new Promise((resolve, reject) => {
            const shortcuts = {};
            db.ref(`shortcuts/${userID}`)
@@ -39,6 +43,10 @@ module.exports = {
         if (count >=  parseInt(process.env.MAX_SHORTCUTS, 10)) {
             return;
         }
+
+        if (auth.currentUser.uid != userID) {
+            return;
+        }
         return new Promise((resolve, reject) => {
             db.ref(`shortcuts/${userID}`).push(data, (error) => {
                 if (error) reject(error)
@@ -51,6 +59,9 @@ module.exports = {
     },
 
     updateShortcut: (data, userID, shortcutID) => {
+        if (auth.currentUser.uid != userID) {
+            return;
+        }
         return new Promise((resolve, reject) => {
             db.ref(`shortcuts/${userID}/${shortcutID}`).set(data, (error) => {
                 if (error) reject(error)
@@ -63,6 +74,9 @@ module.exports = {
     },
 
     removeShortcut: (userID, shortcutID) => {
+        if (auth.currentUser.uid != userID) {
+            return;
+        }
         return new Promise((resolve, reject) => {
             db.ref(`shortcuts/${userID}/${shortcutID}`).remove((error) => {
                 if (error) reject(error)
