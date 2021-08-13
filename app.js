@@ -1,12 +1,9 @@
 require('dotenv').config()
-const iconv = require('iconv-lite');
 const express = require("express")
 const firebase = require("firebase")
 const cors = require("cors")
 const app = express()
 const rateLimit = require("express-rate-limit");
-
-iconv.extendNodeEncodings();
 
 app.use(express.json());
 app.use(express.urlencoded({
